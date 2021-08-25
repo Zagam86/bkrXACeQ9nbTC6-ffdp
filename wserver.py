@@ -200,13 +200,13 @@ input[type="submit"]:hover, input[type="submit"]:focus{
           src="https://telegra.ph/file/6507910fd06d18dfaba82.jpg"
           alt="logo"
         />
-        <a href="https://t.me/SlamMirrorUpdates"> 
-          <h2 class="name">slam-mirrorbot</h2>
+        <a href="https://t.me"> 
+          <h2 class="name">FFDP</h2>
         </a>
       </div>
       <div class="social">
-        <a href="https://github.com/SlamDevs/slam-mirrorbot"><i class="fab fa-github"></i></a>
-        <a href="https://t.me/SlamMirrorUpdates"><i class="fab fa-telegram"></i></a>
+        <a href="https://github.com"><i class="fab fa-github"></i></a>
+        <a href="https://t.me"><i class="fab fa-telegram"></i></a>
       </div>
     </header>
     <section>
@@ -525,13 +525,13 @@ section span{
           src="https://telegra.ph/file/6507910fd06d18dfaba82.jpg"
           alt="logo"
         />
-        <a href="https://t.me/SlamMirrorUpdates">
-          <h2 class="name">slam-mirrorbot</h2>
+        <a href="https://t.me>
+          <h2 class="name">FFDP</h2>
         </a>
       </div>
       <div class="social">
-        <a href="https://github.com/SlamDevs/slam-mirrorbot"><i class="fab fa-github"></i></a>
-        <a href="https://t.me/SlamMirrorUpdates"><i class="fab fa-telegram"></i></a>
+        <a href="https://github.com"><i class="fab fa-github"></i></a>
+        <a href="https://t.me"><i class="fab fa-telegram"></i></a>
       </div>
     </header>
     <section>
@@ -704,7 +704,7 @@ async def set_priority(request):
 @routes.get('/')
 async def homepage(request):
 
-    return web.Response(text="<h1>See slam-mirrorbot <a href='https://github.com/SlamDevs/slam-mirrorbot'>@GitHub</a> By <a href='https://github.com/SlamDevs'>SlamDevs</a></h1>", content_type="text/html")
+    return web.Response(text="<h1>See mirrorbot <a href='https://github.com'>@GitHub</a> By <a href='https://github.com'>FFDP</a></h1>", content_type="text/html")
 
 
 async def e404_middleware(app, handler):
@@ -714,11 +714,11 @@ async def e404_middleware(app, handler):
         try:
             response = await handler(request)
             if response.status == 404:
-                return web.Response(text="<h1>404: Page not found</h2><br><h3>slam-mirrorbot</h3>", content_type="text/html")
+                return web.Response(text="<h1>404: Page not found</h2><br><h3>mirrorbot</h3>", content_type="text/html")
             return response
         except web.HTTPException as ex:
             if ex.status == 404:
-                return web.Response(text="<h1>404: Page not found</h2><br><h3>slam-mirrorbot</h3>", content_type="text/html")
+                return web.Response(text="<h1>404: Page not found</h2><br><h3>mirrorbot</h3>", content_type="text/html")
             raise
     return middleware_handler
 
