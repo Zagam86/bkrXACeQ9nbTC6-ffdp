@@ -525,7 +525,7 @@ section span{
           src="https://telegra.ph/file/6507910fd06d18dfaba82.jpg"
           alt="logo"
         />
-        <a href="https://t.me>
+        <a href="https://t.me">
           <h2 class="name">FFDP</h2>
         </a>
       </div>
@@ -648,7 +648,7 @@ async def re_verfiy(paused, resumed, client, torr):
         else:
             break
         k += 1
-        if k >= 4:
+        if k > 4:
             return False
     return True
 
@@ -704,7 +704,7 @@ async def set_priority(request):
 @routes.get('/')
 async def homepage(request):
 
-    return web.Response(text="<h1>See mirrorbot <a href='https://github.com'>@GitHub</a> By <a href='https://github.com'>FFDP</a></h1>", content_type="text/html")
+    return web.Response(text="<h1>FFDP <a href='https://github.com'>@GitHub</a> By <a href='https://github.com'>Devs</a></h1>", content_type="text/html")
 
 
 async def e404_middleware(app, handler):
@@ -714,7 +714,7 @@ async def e404_middleware(app, handler):
         try:
             response = await handler(request)
             if response.status == 404:
-                return web.Response(text="<h1>404: Page not found</h2><br><h3>mirrorbot</h3>", content_type="text/html")
+                return web.Response(text="<h1>404: Page not found</h2><br><h3>slam-mirrorbot</h3>", content_type="text/html")
             return response
         except web.HTTPException as ex:
             if ex.status == 404:
