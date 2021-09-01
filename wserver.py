@@ -201,7 +201,7 @@ input[type="submit"]:hover, input[type="submit"]:focus{
           alt="logo"
         />
         <a href="https://t.me"> 
-          <h2 class="name">FFDP</h2>
+          <h2 class="name">mirrorbot</h2>
         </a>
       </div>
       <div class="social">
@@ -526,7 +526,7 @@ section span{
           alt="logo"
         />
         <a href="https://t.me">
-          <h2 class="name">FFDP</h2>
+          <h2 class="name">mirrorbot</h2>
         </a>
       </div>
       <div class="social">
@@ -562,7 +562,7 @@ async def list_torrent_contents(request):
 
     gets = request.query
 
-    if not "pin_code" in gets.keys():
+    if "pin_code" not in gets.keys():
         rend_page = code_page.replace("{form_url}", f"/slam/files/{torr}")
         return web.Response(text=rend_page, content_type='text/html')
 
@@ -617,36 +617,31 @@ async def re_verfiy(paused, resumed, client, torr):
             if str(i.id) in paused:
                 if i.priority == 0:
                     continue
-                else:
-                    verify = False
-                    break
+                verify = False
+                break
 
-            if str(i.id) in resumed:
-                if i.priority != 0:
-                    continue
-                else:
-                    verify = False
-                    break
+            if str(i.id) in resumed and i.priority == 0:
+                verify = False
+                break
 
-        if not verify:
-            LOGGER.error("Reverification Failed, correcting stuff...")
-            client.auth_log_out()
-            client = qba.Client(host="localhost", port="8090",
-                               username="admin", password="adminadmin")
-            client.auth_log_in()
-            try:
-                client.torrents_file_priority(
-                    torrent_hash=torr, file_ids=paused, priority=0)
-            except:
-                LOGGER.error("Errored in reverification paused")
-            try:
-                client.torrents_file_priority(
-                    torrent_hash=torr, file_ids=resumed, priority=1)
-            except:
-                LOGGER.error("Errored in reverification resumed")
-            client.auth_log_out()
-        else:
+        if verify:
             break
+        LOGGER.error("Reverification Failed, correcting stuff...")
+        client.auth_log_out()
+        client = qba.Client(host="localhost", port="8090",
+                           username="admin", password="adminadmin")
+        client.auth_log_in()
+        try:
+            client.torrents_file_priority(
+                torrent_hash=torr, file_ids=paused, priority=0)
+        except:
+            LOGGER.error("Errored in reverification paused")
+        try:
+            client.torrents_file_priority(
+                torrent_hash=torr, file_ids=resumed, priority=1)
+        except:
+            LOGGER.error("Errored in reverification resumed")
+        client.auth_log_out()
         k += 1
         if k > 4:
             return False
@@ -666,11 +661,11 @@ async def set_priority(request):
     pause = ""
     data = dict(data)
 
-    for i in data.keys():
+    for i, value in data.items():
         if i.find("filenode") != -1:
             node_no = i.split("_")[-1]
 
-            if data[i] == "on":
+            if value == "on":
                 resume += f"{node_no}|"
             else:
                 pause += f"{node_no}|"
@@ -704,7 +699,7 @@ async def set_priority(request):
 @routes.get('/')
 async def homepage(request):
 
-    return web.Response(text="<h1>FFDP <a href='https://github.com'>@GitHub</a> By <a href='https://github.com'>Devs</a></h1>", content_type="text/html")
+    return web.Response(text="<h1>See mirrorbot <a href='https://github.com'>@GitHub</a> By <a href='https://github.com'>Devils</a></h1>", content_type="text/html")
 
 
 async def e404_middleware(app, handler):
@@ -714,7 +709,7 @@ async def e404_middleware(app, handler):
         try:
             response = await handler(request)
             if response.status == 404:
-                return web.Response(text="<h1>404: Page not found</h2><br><h3>slam-mirrorbot</h3>", content_type="text/html")
+                return web.Response(text="<h1>404: Page not found</h2><br><h3>mirrorbot</h3>", content_type="text/html")
             return response
         except web.HTTPException as ex:
             if ex.status == 404:
